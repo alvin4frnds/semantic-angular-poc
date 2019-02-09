@@ -1,0 +1,88 @@
+
+<div id="logged-in-layout-container" #loggedInLayoutContainer
+     class="layout vertical justified"
+>
+    <div class="ui grid">
+        <div class="four wide column">
+            <img class="ui small image profile" src="/assets/images/profile.jpg">
+        </div>
+
+        <div class="twelve wide column profile-info">
+            <h3 class="ui header">Hello {{ user.name }}!</h3>
+            <div class="content">
+                You have {{ user.tasks.length }} new tasks today
+            </div>
+        </div>
+
+        <div class="fourteen wide column no-top-padding">
+            <div class="ui inline dropdown">
+                <div class="text">{{ user.showing }}</div> tasks
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    <div class="item" data-text="all" (click)="setShowing('all')">All</div>
+                    <div class="active item" data-text="today" (click)="setShowing('today')">Today</div>
+                    <div class="item" data-text="this week" (click)="setShowing('this-week')">This Week</div>
+                    <div class="item" data-text="this month" (click)="setShowing('this-month')">This Month</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="two wide column clickable no-top-padding" (click)="newTask()">
+            <i class="plus icon right floated"></i>
+        </div>
+    </div>
+
+    <div class="ui list cards scrolling flex">
+        <div class="card" *ngIf="!user.tasks.length">
+            <img class="ui image" src="/assets/images/empty.png" alt="No Tasks found">
+        </div>
+
+        <div class="card single-task"
+             *ngFor="let task of user.tasks; let i = index"
+             [ngClass]="{'no-top-padding': !i}"
+        >
+            <div class="content">
+                <div class="header">
+                    <hr [ngClass]="task.priority">
+                    {{ task.title }}
+                </div>
+                <div class="description">
+                    {{ task.body }}
+                </div>
+
+                <div class="ui grid top-padding">
+                    <div class="eight wide column">
+                    <span *ngIf="task.comments.length" class="comments-count">
+                        <i class="comments outline icon"></i>
+                        {{ task.comments.length }}
+                    </span>
+                        <span *ngIf="task.subTasks.length">
+                        <i class="list icon"></i>
+                        &nbsp;&nbsp;&nbsp;{{ task.subTasks.length }}
+                    </span>
+
+                    </div>
+
+                    <div class="eight wide column">
+                        <a class="ui label right floated" *ngIf="task.shared.length > 3">
+                            + {{ task.shared.length - 3 }}
+                        </a>
+
+                        <img *ngFor="let sharedWith of task.shared.slice(0, 3)"
+                             class="ui image extra-small-gravatar-image right floated"
+                             [src]="'/assets/images/avatars/boy-' + sharedWith + '.png'"
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card no-bottom-padding">
+            <button class="fluid positive ui button" (click)="newTask()">
+                <i class="plus icon"></i>
+                New Task
+            </button>
+        </div>
+    </div>
+
+</div>

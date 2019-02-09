@@ -1,0 +1,65 @@
+@import "../../bootstrap.styl"
+
+#logged-in-layout-container
+  fullHeightWidth()
+  padding 24px
+
+img.profile
+  border-radius 10px
+  border solid 2px lightgoldenrodyellow
+  height 150px
+  width 150px
+
+.profile-info
+  background transparent
+  margin-bottom 0
+  margin-top auto
+  padding-left 0
+
+.profile-info h3
+  margin-bottom 0
+  font-size 2rem
+
+.profile-info .content
+  font-size 1.2rem
+
+.cards, .cards .card
+  width 100%
+
+.cards .card
+  box-shadow 0 4px 20px orange;
+
+.cards:first-child
+  @extend .no-top-padding
+
+.single-task hr
+  width: 4rem
+  border-width: 2px
+  border-style: double
+  margin-left 0
+  &.red
+    hrColor(red)
+  &.yello
+    hrColor(yello)
+  &.blue
+    hrColor(blue)
+  &.green
+    hrColor(green)
+
+.top-padding
+  margin-top 2px
+
+span.comments-count
+  margin-right 10px
+
+img.extra-small-gravatar-image
+  width 22px
+  height 22px
+  border-radius 2px
+  margin-left 2px !important
+  margin-right 2px !important
+  margin-bottom 0 !important
+
+.list.scrolling
+  margin-top 14px
+  overflow-y scroll
